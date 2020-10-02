@@ -1,0 +1,24 @@
+# index:
+#    path: /
+#    controller: App\Controller\EventController::index
+
+# create:
+#   path: /create-event
+#   controller: App\Controller\EventController::createEvent
+
+# view:
+#   path: /view-event
+#   controller: App\Controller\EventController::viewEvent
+
+# show:
+#   path: /show-event
+#   controller: App\Controller\EventController::showEvent
+
+# delete:
+#   path: /delete-event
+#   controller: App\Controller\EventController::deleteEvent
+
+# update:
+#   path: /update-event
+#   controller: App\Controller\EventController::updateEvent
+

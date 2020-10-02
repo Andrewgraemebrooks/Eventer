@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Eventer
+{% endblock %}
+
+{% block body %}
+    {% if events %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Event
+                    </th>
+                    <th>
+                        Venue
+                    </th>
+                    <th>
+                        Description
+                    </th>
+                    <th>
+                        Date
+                    </th>
+                    <th>
+                        Time
+                    </th>
+                    <th>
+                        Duration
+                    </th>
+                    <th>
+                        Delete
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for event in events %}
+                    <tr>
+                        <td>
+                            {{ event.name }}
+                        </td>
+                        <td>
+                            {{ event.venue }}
+                        </td>
+                        <td>
+                            {{ event.description }}
+                        </td>
+                        <td>
+                            {{ event.date.format('d/m/Y') }}
+                        </td>
+                        <td>
+                            {{ event.date.format('H:i') }}
+                        </td>
+                        <td>
+                            {{ event.duration }}
+                        </td>
+                        <td>
+                            <a href="/event/1" class="btn btn-danger btn-sm">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>
+            No Events To Display
+        </p>
+    {% endif %}
+{% endblock %}
