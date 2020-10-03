@@ -1,7 +1,12 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+  <link rel="stylesheet" href="../../public/bootstrap.min.css" />
+  <link rel="stylesheet" href="../../public/style.css" />
+{% endblock %}
+
 {% block body %}
-  <div class="container new">
+  <div class="container edit">
     <div class="col mt-5">
       {# The Event Form #}
       {{ form_start(form) }}

@@ -1,70 +1,85 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}
-    Eventer
+{% block body %}
+  <div class="container show">
+    {% if events %}
+      {# If there are events in the database, show the event table #}
+      <table id="events" class="table">
+        <thead>
+          <tr>
+            <th>
+              Event
+            </th>
+            <th>
+              Venue
+            </th>
+            <th>
+              Description
+            </th>
+            <th>
+              Date
+            </th>
+            <th>
+              Time
+            </th>
+            <th>
+              Duration
+            </th>
+            <th>
+              Update
+            </th>
+            <th>
+              Delete
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for event in events %}
+            <tr>
+              <td>
+                {{ event.name }}
+              </td>
+              <td>
+                {{ event.venue }}
+              </td>
+              <td>
+                {{ event.description }}
+              </td>
+              <td>
+                {{ event.date.format('d/m/Y') }}
+              </td>
+              <td>
+                {{ event.date.format('H:i') }}
+              </td>
+              <td>
+                {{ event.duration }} Min
+              </td>
+              <td>
+                <a href="/eventer/public/update-event/{{ event.id }}"
+                  class="btn btn-success btn-sm update-event">
+                  Update
+                </a>
+              </td>
+              <td>
+                <a href="#"
+                  class="btn btn-danger btn-sm delete-event"
+                  data-id="{{ event.id }}">
+                  Delete
+                </a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      {# If there aren't any events then display a "No Events" message #}
+      <h3 class="text-center pt-5">
+        No Events To Display
+      </h3>
+    {% endif %}
+  </div>
 {% endblock %}
 
-{% block body %}
-    {% if events %}
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        Event
-                    </th>
-                    <th>
-                        Venue
-                    </th>
-                    <th>
-                        Description
-                    </th>
-                    <th>
-                        Date
-                    </th>
-                    <th>
-                        Time
-                    </th>
-                    <th>
-                        Duration
-                    </th>
-                    <th>
-                        Delete
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for event in events %}
-                    <tr>
-                        <td>
-                            {{ event.name }}
-                        </td>
-                        <td>
-                            {{ event.venue }}
-                        </td>
-                        <td>
-                            {{ event.description }}
-                        </td>
-                        <td>
-                            {{ event.date.format('d/m/Y') }}
-                        </td>
-                        <td>
-                            {{ event.date.format('H:i') }}
-                        </td>
-                        <td>
-                            {{ event.duration }} Min
-                        </td>
-                        <td>
-                            <a href="/event/1" class="btn btn-danger btn-sm">
-                                Delete
-                            </a>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    {% else %}
-        <p>
-            No Events To Display
-        </p>
-    {% endif %}
+{% block javascripts %}
+  <script src="js/main.js"></script>
 {% endblock %}
