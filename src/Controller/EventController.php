@@ -2,8 +2,6 @@
 
 namespace App\Controller;
 
-// use App\Form\EventType;
-use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -11,55 +9,66 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use \App\Entity\Event;
 
 class EventController extends AbstractController
 {
     /**
-     * @Route("/", name="index")
+     * The route to take the user to the home page.
+     *
+     * @return void
      */
     public function index()
     {
-
-        $events = $this->getDoctrine()->getRepository(Event::class)->findAll();
-
-        return $this->render('event/index.html.twig', array('events' => $events));
-
-        // return $this->render('event/index.html.twig', [
-        //     'controller_name' => 'EventController',
-        // ]);
+        // Render the home page.
+        return $this->render('event/index.html.twig');
     }
 
     /**
-     * @Route("/show-events", name="show-events")
+     * The route to take the user to all the events.
+     *
+     * @return void
      */
     public function show()
     {
+        // Get all of the events.
         $events = $this->getDoctrine()->getRepository(Event::class)->findAll();
 
+        // Render the page to display all of the events.
         return $this->render('event/show.html.twig', array('events' => $events));
     }
 
     /**
-     * @Route("/create-event")
+     * The route to take the user to the create a new event. It is also deals with the submission of the event's form.
+     *
+     * @param Request $request - The request object.
+     * @return void
      */
-    function new (Request $request) {
+    public function new(Request $request)
+    {
+        // Create a new event object.
         $event = new Event();
-        // $form = $this->createForm(EventType::class, $event, array('attr' => array('class' => 'form-control')));
+        // Use the event object to build a form.
         $form = $this->createFormBuilder($event)
-            ->add('name', TextType::class, array('attr' => array('class' => 'form-control mb-3')))
-            ->add('description', TextType::class, array('attr' => array('class' => 'form-control mb-3')))
-            ->add('date', DateTimeType::class, array('attr' => array('class' => 'mb-3')))
-            ->add('duration', NumberType::class, array('attr' => array('class' => 'form-control mb-3')))
-            ->add('venue', TextType::class, array('attr' => array('class' => 'form-control mb-3')))
+            ->add('name', TextType::class, array('attr' =>
+                array('class' => 'form-control mb-3', 'placeholder' => 'The Event Name')))
+            ->add('description', TextType::class, array('attr' =>
+                array('class' => 'form-control mb-3', 'placeholder' => 'A Description Of The Event')))
+            ->add('date', DateTimeType::class, array('attr' =>
+                array('class' => 'form-control input-group date mb-3')))
+            ->add('duration', NumberType::class, array('attr' =>
+                array('class' => 'form-control mb-3', 'placeholder' => 'The Duration (In Minutes)')))
+            ->add('venue', TextType::class, array('attr' =>
+                array('class' => 'form-control mb-3', 'placeholder' => 'The Location Of The Event')))
             ->add('save', SubmitType::class, array(
                 'attr' => array('class' => 'btn btn-success'),
                 'label' => 'Create',
             ))->getForm();
 
+        // Handle the request to check if the form has been submitted.
         $form->handleRequest($request);
 
+        // If the form has been submitted and is valid, add the event to the database.
         if ($form->isSubmitted() && $form->isValid()) {
             $event = $form->getData();
 
@@ -67,36 +76,79 @@ class EventController extends AbstractController
             $entityManager->persist($event);
             $entityManager->flush();
 
-            return $this->redirectToRoute("index");
+            // Redirect to the show events page.
+            return $this->redirectToRoute('show-events');
         }
 
+        // If the form hasn't been submitted, show the form.
         return $this->render('event/new.html.twig', array(
             'form' => $form->createView(),
         ));
     }
 
     /**
-     * @Route("api/event/save")
+     * The route to take the user to the edit event page. It is also deals with the submission of the event's form.
+     *
+     * @param Request $request
+     * @param String $id
+     * @return void
      */
-    public function save()
+    public function edit(Request $request, $id)
     {
-        // Get the entity manager.
+        // Find the specific event.
+        $event = $this->getDoctrine()->getRepository(Event::class)->find($id);
+        // Use the event object to build a form so that all of the current information is shown.
+        $form = $this->createFormBuilder($event)
+            ->add('name', TextType::class, array('attr' =>
+                array('class' => 'form-control mb-3', 'placeholder' => 'The Event Name')))
+            ->add('description', TextType::class, array('attr' =>
+                array('class' => 'form-control mb-3', 'placeholder' => 'A Description Of The Event')))
+            ->add('date', DateTimeType::class, array('attr' =>
+                array('class' => 'form-control input-group date mb-3')))
+            ->add('duration', NumberType::class, array('attr' =>
+                array('class' => 'form-control mb-3', 'placeholder' => 'The Duration (In Minutes)')))
+            ->add('venue', TextType::class, array('attr' =>
+                array('class' => 'form-control mb-3', 'placeholder' => 'The Location Of The Event')))
+            ->add('save', SubmitType::class, array(
+                'attr' => array('class' => 'btn btn-success'),
+                'label' => 'Update',
+            ))->getForm();
+
+        // Handle the request to check if the form has been submitted.
+        $form->handleRequest($request);
+        // If the form has been submitted and is valid, update the event in the database.
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->flush();
+
+            // Redirect to the show events page.
+            return $this->redirectToRoute('show-events');
+        }
+
+        // If the form hasn't been submitted, show the form.
+        return $this->render('event/edit.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
+
+    /**
+     * The route to delete an event.
+     *
+     * @param String $id
+     * @return void
+     */
+    public function delete($id)
+    {
+        // Find the specific event.
+        $event = $this->getDoctrine()->getRepository(Event::class)->find($id);
+
+        // Remove the event from the database.
         $entityManager = $this->getDoctrine()->getManager();
-
-        // Create the new event
-        $event = new Event();
-        $event->setName('Event One');
-        $event->setDescription('An event');
-        $event->setDate(new DateTime());
-        $event->setDuration(120);
-        $event->setVenue("Venue");
-
-        // Persist tells the entity manager that we want to save the $event object.
-        $entityManager->persist($event);
-
-        // Add the new event to the database.
+        $entityManager->remove($event);
         $entityManager->flush();
 
-        return new Response('Saved an event with the id of ' . $event->getId());
+        // Return an empty response. The front-end javascript automatically reloads the page.
+        $response = new Response();
+        return $response->send();
     }
 }
