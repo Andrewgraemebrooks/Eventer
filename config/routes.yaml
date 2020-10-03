@@ -1,24 +1,24 @@
-# index:
-#    path: /
-#    controller: App\Controller\EventController::index
+index:
+    path: /
+    controller: App\Controller\EventController::index
+    methods: GET
 
-# create:
-#   path: /create-event
-#   controller: App\Controller\EventController::createEvent
+create-event:
+    path: /create-event
+    controller: App\Controller\EventController::new
+    methods: GET|POST
 
-# view:
-#   path: /view-event
-#   controller: App\Controller\EventController::viewEvent
+show-events:
+    path: /show-events
+    controller: App\Controller\EventController::show
+    methods: GET
 
-# show:
-#   path: /show-event
-#   controller: App\Controller\EventController::showEvent
+delete-event:
+    path: /delete-event/{id}
+    controller: App\Controller\EventController::delete
+    methods: DELETE
 
-# delete:
-#   path: /delete-event
-#   controller: App\Controller\EventController::deleteEvent
-
-# update:
-#   path: /update-event
-#   controller: App\Controller\EventController::updateEvent
-
+update-event:
+    path: /update-event/{id}
+    controller: App\Controller\EventController::edit
+    methods: GET|POST
