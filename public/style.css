@@ -1,12 +1,31 @@
 .home {
+    background: url(img/edwin-andrade-6liebVeAfrY-unsplash-min.jpg) no-repeat
+        center center fixed;
     display: table;
-    height: 100%;
     position: relative;
     width: 100%;
+    background-size: cover;
 }
 
-.landing-text {
+.landing-text{
+    z-index: 100;
     display: table-cell;
     text-align: center;
     vertical-align: middle;
+    padding-bottom: 15%;
+}
+
+.no-events {
+    padding-top: 30vh;
+}
+
+.footer-text {
+    padding-top: 0.5%;
+}
+
+.new,
+.home,
+.show,
+.edit {
+    height: 100vh;
 }
