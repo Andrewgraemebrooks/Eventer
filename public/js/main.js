@@ -13,7 +13,7 @@ const deleteEventHandler = e => {
     // Get the event id from the data-id attribute.
     const id = e.target.getAttribute("data-id");
     // Fetch the symfony 4 delete-event route.
-    fetch(`/eventer/public/delete-event/${id}`, {
+    fetch(`/delete-event/${id}`, {
       method: "DELETE"
     })
       .then(res => {
