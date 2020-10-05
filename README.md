@@ -17,7 +17,7 @@ Requires [Composer](https://getcomposer.org/) to install dependencies
 If you have composer installed globally on your machine, run the install_dependencies.sh that I have provided.
 This will install all composer dependencies and run the database migrations.
 
-`./install_dependencies.sh`
+`./install_dependencies_migrations.sh`
 
 #### Method 2: Manually install the dependencies and run the database migrations.
 
