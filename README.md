@@ -77,4 +77,4 @@ Run the program by running all of the docker containers and opening a browser an
 
 ## License
 
-StudentLink is [MIT-Licensed](LICENSE)
+Eventer is [MIT-Licensed](LICENSE)
