@@ -14,9 +14,14 @@
       </div>
       <div class="row">
         <div class="col">
-            {{ form_label(form.password) }}
-            {{ form_widget(form.password) }}
-            <div class="text-danger">{{ form_errors(form.password) }}</div>
+            {{ form_label(form.password.first) }}
+            {{ form_widget(form.password.first) }}
+            {{ form_label(form.password.second) }}
+            {{ form_widget(form.password.second) }}
+            {% if form_errors(form.password) %}
+            <div class="text-danger">Your passwords must match.</div>
+            {% endif %}
+            <br>
         </div>
     </div>
       {{ form_end(form) }}

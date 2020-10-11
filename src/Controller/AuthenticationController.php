@@ -6,6 +6,7 @@ use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,8 +27,12 @@ class AuthenticationController extends AbstractController
         $form = $this->createFormBuilder($user)
             ->add('email', EmailType::class, array('attr' =>
                 array('class' => 'form-control mb-3', 'placeholder' => 'Your email address')))
-            ->add('password', PasswordType::class, array('attr' =>
-                array('class' => 'form-control mb-3', 'placeholder' => 'Your password')))
+            ->add('password', RepeatedType::class, array(
+                'type' => PasswordType::class,
+                'first_options' => ['label' => 'Password', 'attr' =>
+                    array('class' => 'form-control mb-3', 'placeholder' => 'Your password')],
+                'second_options' => ['label' => 'Confirm Password', 'attr' =>
+                    array('class' => 'form-control mb-3', 'placeholder' => 'Confirm password')]))
             ->add('save', SubmitType::class, array(
                 'attr' => array('class' => 'btn btn-success'),
                 'label' => 'Sign Up',
@@ -50,9 +55,9 @@ class AuthenticationController extends AbstractController
             } else {
                 // Encode user's password
                 $hashedPassword = password_hash($newUser->getPassword(), PASSWORD_DEFAULT);
-                
                 // Update new user's password with encrypted password
                 $newUser->setPassword($hashedPassword);
+                
                 // Add user to the database
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($newUser);
