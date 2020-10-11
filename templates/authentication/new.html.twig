@@ -9,7 +9,10 @@
         <div class="col">
             {{ form_label(form.email) }}
             {{ form_widget(form.email) }}
-            <div class="text-danger">{{ form_errors(form.email) }}</div>
+            {% if form_errors(form.email) %}
+            <div class="text-danger">Email already taken.</div>
+            <br>
+            {% endif %}
         </div>
       </div>
       <div class="row">
@@ -20,8 +23,8 @@
             {{ form_widget(form.password.second) }}
             {% if form_errors(form.password) %}
             <div class="text-danger">Your passwords must match.</div>
-            {% endif %}
             <br>
+            {% endif %}
         </div>
     </div>
       {{ form_end(form) }}
