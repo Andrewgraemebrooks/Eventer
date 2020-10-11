@@ -12,14 +12,22 @@ use Symfony\Component\HttpFoundation\Request;
 
 class AuthenticationController extends AbstractController
 {
+    /**
+     * The route to register the user to the database.
+     *
+     * @param Request $request - The request object.
+     * @return void
+     */
     public function register(Request $request)
     {
         // Create a new user object for the form
         $user = new User();
         // Use the user object to build the form
         $form = $this->createFormBuilder($user)
-            ->add('email', EmailType::class, array('attr' => array('class' => 'form-control mb-3', 'placeholder' => 'Your email address')))
-            ->add('password', PasswordType::class, array('attr' => array('class' => 'form-control mb-3', 'placeholder' => 'Your password')))
+            ->add('email', EmailType::class, array('attr' =>
+                array('class' => 'form-control mb-3', 'placeholder' => 'Your email address')))
+            ->add('password', PasswordType::class, array('attr' =>
+                array('class' => 'form-control mb-3', 'placeholder' => 'Your password')))
             ->add('save', SubmitType::class, array(
                 'attr' => array('class' => 'btn btn-success'),
                 'label' => 'Sign Up',
@@ -33,7 +41,8 @@ class AuthenticationController extends AbstractController
             $newUser = $form->getData();
 
             // Check to see if the email is already registered.
-            $existingUser = $this->getDoctrine()->getRepository(User::class)->findOneBy(['email' => $newUser->getEmail()]);
+            $existingUser = $this->getDoctrine()->getRepository(User::class)
+                ->findOneBy(['email' => $newUser->getEmail()]);
 
             // If not null then, the user already exists
             if (!is_null($existingUser)) {
@@ -52,7 +61,6 @@ class AuthenticationController extends AbstractController
                 // Redirect to the show events page.
                 return $this->redirectToRoute('show-events');
             }
-
         }
 
         // If the form hasn't been submitted, show the form.
