@@ -22,3 +22,7 @@ update-event:
     path: /update-event/{id}
     controller: App\Controller\EventController::edit
     methods: GET|POST
+
+register:
+    path: /register
+    controller: App\Controller\AuthenticationController::register
