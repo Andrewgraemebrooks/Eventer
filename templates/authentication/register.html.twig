@@ -7,9 +7,9 @@
         Please register
       </h1>
       {# The Registration Form #}
-      {% if form_errors(form) %}
+      {% if form_errors(form.password) or form_errors(form.email) %}
         <div class="alert alert-danger">
-          {{ error.messageKey|trans(error.messageData, 'security') }}
+          There was a problem with your registration information
         </div>
       {% endif %}
       {{ form_start(form) }}
@@ -17,12 +17,6 @@
         <div class="col">
           {{ form_label(form.email) }}
           {{ form_widget(form.email) }}
-          {% if form_errors(form.email) %}
-            <div class="text-danger">
-              Email already taken.
-            </div>
-            <br />
-          {% endif %}
         </div>
       </div>
       <div class="row">
@@ -31,12 +25,6 @@
           {{ form_widget(form.password.first) }}
           {{ form_label(form.password.second) }}
           {{ form_widget(form.password.second) }}
-          {% if form_errors(form.password) %}
-            <div class="text-danger">
-              {{ form_errors(form.password) }}
-            </div>
-            <br />
-          {% endif %}
         </div>
       </div>
       {{ form_end(form) }}
