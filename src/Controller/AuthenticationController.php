@@ -28,11 +28,14 @@ class AuthenticationController extends AbstractController
         $user = new User();
         // Use the user object to build the form
         $form = $this->createFormBuilder($user)
-            ->add('email', EmailType::class, array('attr' => array('class' => 'form-control mb-3', 'placeholder' => 'Your email address')))
+            ->add('email', EmailType::class, array('attr' =>
+                array('class' => 'form-control mb-3', 'placeholder' => 'Your email address')))
             ->add('password', RepeatedType::class, array(
                 'type' => PasswordType::class,
-                'first_options' => ['label' => 'Password', 'attr' => array('class' => 'form-control mb-3', 'placeholder' => 'Your password')],
-                'second_options' => ['label' => 'Confirm Password', 'attr' => array('class' => 'form-control mb-3', 'placeholder' => 'Confirm password')]))
+                'first_options' => ['label' => 'Password', 'attr' =>
+                    array('class' => 'form-control mb-3', 'placeholder' => 'Your password')],
+                'second_options' => ['label' => 'Confirm Password', 'attr' =>
+                    array('class' => 'form-control mb-3', 'placeholder' => 'Confirm password')]))
             ->add('save', SubmitType::class, array(
                 'attr' => array('class' => 'btn btn-success'),
                 'label' => 'Sign Up',
@@ -83,12 +86,15 @@ class AuthenticationController extends AbstractController
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('authentication/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+        return $this->render(
+            'authentication/login.html.twig',
+            ['last_username' => $lastUsername, 'error' => $error]
+        );
     }
 
     public function logout()
     {
-        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+        throw new \LogicException('This method can be blank - it will be intercepted 
+            by the logout key on your firewall.');
     }
-
 }
