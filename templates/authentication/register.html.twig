@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <div class="container new">
+    <div class="col mt-5">
+      <h1 class="h3 mb-3 font-weight-normal">
+        Please register
+      </h1>
+      {# The Registration Form #}
+      {% if form_errors(form) %}
+        <div class="alert alert-danger">
+          {{ error.messageKey|trans(error.messageData, 'security') }}
+        </div>
+      {% endif %}
+      {{ form_start(form) }}
+      <div class="row">
+        <div class="col">
+          {{ form_label(form.email) }}
+          {{ form_widget(form.email) }}
+          {% if form_errors(form.email) %}
+            <div class="text-danger">
+              Email already taken.
+            </div>
+            <br />
+          {% endif %}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          {{ form_label(form.password.first) }}
+          {{ form_widget(form.password.first) }}
+          {{ form_label(form.password.second) }}
+          {{ form_widget(form.password.second) }}
+          {% if form_errors(form.password) %}
+            <div class="text-danger">
+              {{ form_errors(form.password) }}
+            </div>
+            <br />
+          {% endif %}
+        </div>
+      </div>
+      {{ form_end(form) }}
+    </div>
+  </div>
+{% endblock %}
