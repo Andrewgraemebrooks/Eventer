@@ -36,7 +36,11 @@
           value="{{ csrf_token('authenticate') }}" />
 
         <button class="btn btn-success" type="submit">Sign in</button>
+        <button id="guest-button" class="btn btn-warning">Guest</button>
       </form>
     </div>
   </div>
+{% endblock %}
+{% block javascripts %}
+<script src="js/main.js"></script>
 {% endblock %}
