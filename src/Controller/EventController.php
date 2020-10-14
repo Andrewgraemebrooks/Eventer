@@ -30,10 +30,11 @@ class EventController extends AbstractController
      *
      * @return void
      */
-    public function show()
+    public function show(Security $security)
     {
-        // Get all of the events.
-        $events = $this->getDoctrine()->getRepository(Event::class)->findAll();
+        $currentUser = $security->getUser();
+        // Get all of the user's events.
+        $events = $this->getDoctrine()->getRepository(Event::class)->findBy(['user' => $currentUser]);
 
         // Render the page to display all of the events.
         return $this->render('event/show.html.twig', array('events' => $events));
