@@ -35,12 +35,15 @@ if (events) {
 
 /**
  * Fills in the login fields with the guest account information
- * @param {MouseEvent} e - The button click. 
+ * @param {MouseEvent} e - The button click.
  */
 const guestModeEventHandler = (e) => {
   document.getElementById("inputEmail").value = "guest@guest.com";
   document.getElementById("inputPassword").value = "guest";
 };
 
-// Add event handler to the guest-mode button
-guestButton.addEventListener("click", (e) => guestModeEventHandler(e));
+// If the guest button exists, add the handler
+if (guestButton) {
+  // Add event handler to the guest-mode button
+  guestButton.addEventListener("click", (e) => guestModeEventHandler(e));
+}
