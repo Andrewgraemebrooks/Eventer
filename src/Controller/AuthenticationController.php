@@ -75,6 +75,12 @@ class AuthenticationController extends AbstractController
         ));
     }
 
+    /**
+     * The route that renders the login page.
+     *
+     * @param AuthenticationUtils $authenticationUtils
+     * @return Response
+     */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         // if ($this->getUser()) {
@@ -92,6 +98,11 @@ class AuthenticationController extends AbstractController
         );
     }
 
+    /**
+     * The route that handles the logout feature.
+     *
+     * @return void
+     */
     public function logout()
     {
         throw new \LogicException('This method can be blank - it will be intercepted 
