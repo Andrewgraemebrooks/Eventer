@@ -76,10 +76,18 @@
       <h3 class="text-center pt-5">
         No Events To Display
       </h3>
+      <div class="flex-container">
+        <div class="flex-item">
+          <a href="/create-event"
+            class="btn btn-success mt-3 show-create-event-button">
+            Create an event
+          </a>
+        </div>
+      </div>
     {% endif %}
   </div>
 {% endblock %}
 
 {% block javascripts %}
-<script src="js/main.js"></script>
+  <script src="js/main.js"></script>
 {% endblock %}
