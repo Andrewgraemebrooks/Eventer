@@ -7,28 +7,28 @@
       <table id="events" class="table">
         <thead>
           <tr>
-            <th>
+            <th class="text-center">
               Event
             </th>
-            <th>
+            <th class="text-center">
               Venue
             </th>
-            <th>
+            <th class="text-center">
               Description
             </th>
-            <th>
+            <th class="text-center">
               Date
             </th>
-            <th>
+            <th class="text-center">
               Time
             </th>
-            <th>
+            <th class="text-center">
               Duration
             </th>
-            <th>
+            <th class="text-center">
               Update
             </th>
-            <th>
+            <th class="text-center">
               Delete
             </th>
           </tr>
@@ -36,31 +36,31 @@
         <tbody>
           {% for event in events %}
             <tr>
-              <td>
+              <td class="text-center">
                 {{ event.name }}
               </td>
-              <td>
+              <td class="text-center">
                 {{ event.venue }}
               </td>
-              <td>
+              <td class="text-center">
                 {{ event.description }}
               </td>
-              <td>
+              <td class="text-center">
                 {{ event.date.format('d/m/Y') }}
               </td>
-              <td>
+              <td class="text-center">
                 {{ event.date.format('H:i') }}
               </td>
-              <td>
+              <td class="text-center">
                 {{ event.duration }} Mins
               </td>
-              <td>
+              <td class="text-center">
                 <a href="/update-event/{{ event.id }}"
-                  class="btn btn-success btn-sm update-event">
+                  class="btn btn-info btn-sm update-event">
                   Update
                 </a>
               </td>
-              <td>
+              <td class="text-center">
                 <a href="#"
                   class="btn btn-danger btn-sm delete-event"
                   data-id="{{ event.id }}">
@@ -71,6 +71,14 @@
           {% endfor %}
         </tbody>
       </table>
+      <div class="flex-container">
+        <div class="flex-item">
+          <a href="/create-event"
+            class="btn btn-success mt-3 show-create-event-button">
+            Create an event
+          </a>
+        </div>
+      </div>
     {% else %}
       {# If there aren't any events then display a "No Events" message #}
       <h3 class="text-center pt-5">
