@@ -1,28 +1,31 @@
 index:
-    path: /
-    controller: App\Controller\EventController::index
-    methods: GET
+  path: /
+  controller: App\Controller\EventController::index
 
 create-event:
-    path: /create-event
-    controller: App\Controller\EventController::new
-    methods: GET|POST
+  path: /create-event
+  controller: App\Controller\EventController::new
 
 show-events:
-    path: /show-events
-    controller: App\Controller\EventController::show
-    methods: GET
+  path: /show-events
+  controller: App\Controller\EventController::show
 
 delete-event:
-    path: /delete-event/{id}
-    controller: App\Controller\EventController::delete
-    methods: DELETE
+  path: /delete-event/{id}
+  controller: App\Controller\EventController::delete
 
 update-event:
-    path: /update-event/{id}
-    controller: App\Controller\EventController::edit
-    methods: GET|POST
+  path: /update-event/{id}
+  controller: App\Controller\EventController::edit
 
 register:
-    path: /register
-    controller: App\Controller\AuthenticationController::register
+  path: /register
+  controller: App\Controller\AuthenticationController::register
+
+app_login:
+  path: /login
+  controller: App\Controller\AuthenticationController::login
+
+app_logout:
+  path: /logout
+  controller: App\Controller\AuthenticationController::logout

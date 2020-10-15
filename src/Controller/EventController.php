@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Security;
 use \App\Entity\Event;
 
 class EventController extends AbstractController
@@ -29,10 +30,11 @@ class EventController extends AbstractController
      *
      * @return void
      */
-    public function show()
+    public function show(Security $security)
     {
-        // Get all of the events.
-        $events = $this->getDoctrine()->getRepository(Event::class)->findAll();
+        $currentUser = $security->getUser();
+        // Get all of the user's events.
+        $events = $this->getDoctrine()->getRepository(Event::class)->findBy(['user' => $currentUser]);
 
         // Render the page to display all of the events.
         return $this->render('event/show.html.twig', array('events' => $events));
@@ -44,7 +46,7 @@ class EventController extends AbstractController
      * @param Request $request - The request object.
      * @return void
      */
-    public function new(Request $request)
+    public function new(Request $request, Security $security)
     {
         // Create a new event object.
         $event = new Event();
@@ -71,6 +73,8 @@ class EventController extends AbstractController
         // If the form has been submitted and is valid, add the event to the database.
         if ($form->isSubmitted() && $form->isValid()) {
             $event = $form->getData();
+
+            $event->setUser($security->getUser());
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($event);
