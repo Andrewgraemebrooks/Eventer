@@ -1,0 +1,67 @@
+<?php
+
+namespace Tests\Feature;
+
+use App\Models\Event;
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Tests\TestCase;
+
+class UpdateEventTest extends TestCase
+{
+
+    use refreshDatabase;
+
+    /**
+     * An event can be updated.
+     */
+    public function testEventCanBeUpdated()
+    {
+        // Remove exception handling to ensure that Laravel doesn't hide exception details.
+        $this->withoutExceptionHandling();
+
+        // Create a user to own the event.
+        User::factory()->create();
+
+        // Assert that the user has been added to the database.
+        $this->assertCount(1, User::all());
+
+        // Act as the newly created user.
+        $this->actingAs(User::all()->first());
+
+        // Create the event.
+        $this->post('/event', [
+            'name' => 'Event',
+            'description' => 'Event Description',
+            'date' => now(),
+            'time' => '12:00:00',
+            "duration" => '120',
+            "venue" => 'Event Venue',
+        ]);
+
+        // Assert that the event is stored in the database.
+        $this->assertCount(1, Event::all());
+
+        // Get event
+        $event = Event::all()->first();
+
+        // Update the event.
+        $response = $this->patch('/event/' . $event->id, [
+            'name' => 'Updated Event',
+            'description' => 'Updated Event Description',
+            'date' => now(),
+            'time' => '12:00:00',
+            "duration" => '120',
+            "venue" => 'Updated Event Venue',
+        ]);
+
+        // Assert that the route works well.
+        $response->assertOk();
+
+        // Assert that the event has been updated
+        $this->assertEquals('Updated Event', Event::all()->first()->name);
+        $this->assertEquals('Updated Event Description', Event::all()->first()->description);
+        $this->assertEquals('Updated Event Venue', Event::all()->first()->venue);
+    }
+}
