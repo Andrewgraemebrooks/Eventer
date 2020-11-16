@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -36,23 +37,11 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => ['required', 'min:3', 'max:60'],
-            'description' => ['required', 'max:255'],
-            'date' => ['required', 'date'],
-            'time' => ['required', 'date_format:H:i:s'],
-            'duration' => ['required', 'integer', 'between:1,1440'],
-            'venue' => ['required', 'max:60'],
-        ]);
+        $data = $this->validateRequest($request);
 
         $event = new Event();
-        $event->name = $request->name;
+        $event->fill($data);
         $event->user_id = Auth::id();
-        $event->description = $request->description;
-        $event->date = $request->date;
-        $event->time = $request->time;
-        $event->duration = $request->duration;
-        $event->venue = $request->venue;
         $event->save();
     }
 
@@ -87,7 +76,9 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
-        //
+        $data = $this->validateRequest($request);
+
+        $event->update($data);
     }
 
     /**
@@ -99,5 +90,23 @@ class EventController extends Controller
     public function destroy(Event $event)
     {
         //
+    }
+
+    /**
+     * Validates the event form fields from the request.
+     * @param Request $request
+     * @return array
+     * @author Andrew Brooks
+     */
+    protected function validateRequest(Request $request): array
+    {
+        return $request->validate([
+            'name' => ['required', 'min:3', 'max:60'],
+            'description' => ['required', 'max:60'],
+            'date' => ['required', 'date'],
+            'time' => ['required', 'date_format:H:i:s'],
+            'duration' => ['required', 'integer', 'between:1,1440'],
+            'venue' => ['required', 'max:60'],
+        ]);
     }
 }
