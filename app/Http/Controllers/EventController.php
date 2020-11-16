@@ -37,12 +37,12 @@ class EventController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'min:3', 'max:255'],
+            'name' => ['required', 'min:3', 'max:60'],
             'description' => ['required', 'max:255'],
             'date' => ['required', 'date'],
-            'time' => ['required'],
-            'duration' => ['required', 'digits_between:1,4'],
-            'venue' => ['required', 'max:255'],
+            'time' => ['required', 'date_format:H:i:s'],
+            'duration' => ['required', 'integer', 'between:1,1440'],
+            'venue' => ['required', 'max:60'],
         ]);
 
         $event = new Event();
