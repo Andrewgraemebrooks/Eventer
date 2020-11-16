@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class  EventController extends Controller
+class EventController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -37,6 +38,12 @@ class  EventController extends Controller
     {
         $event = new Event();
         $event->name = $request->name;
+        $event->user_id = Auth::id();
+        $event->description = $request->description;
+        $event->date = $request->date;
+        $event->time = $request->time;
+        $event->duration = $request->duration;
+        $event->venue = $request->venue;
         $event->save();
     }
 

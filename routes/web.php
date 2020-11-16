@@ -14,12 +14,16 @@ use \App\Http\Controllers\EventController;
 |
 */
 
+// Welcome route.
 Route::get('/', function () {
     return view('welcome');
 });
 
-// Store the event in the database.
-Route::post('/event', [EventController::class, 'store']);
+// The event resource routes.
+Route::resource('event', EventController::class);
+
+// Authentication routes.
 Auth::routes();
 
+// Home controller index route.
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
