@@ -49,13 +49,13 @@ class UpdateEventTest extends TestCase
             "venue" => 'Updated Event Venue',
         ]);
 
-        // Assert that the route works well.
-        $response->assertOk();
-
-        // Assert that the event has been updated
+        // Assert that the event has been updated.
         $this->assertEquals('Updated Event', Event::all()->first()->name);
         $this->assertEquals('Updated Event Description', Event::all()->first()->description);
         $this->assertEquals('Updated Event Venue', Event::all()->first()->venue);
+
+        // Assert that the route redirects the user back to the event page.
+        $response->assertRedirect('/event/' . $eventId);
     }
 
     /**

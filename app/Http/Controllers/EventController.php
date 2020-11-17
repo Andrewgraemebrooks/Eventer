@@ -72,13 +72,15 @@ class EventController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param \App\Models\Event $event
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirecto
      */
     public function update(Request $request, Event $event)
     {
         $data = $this->validateRequest($request);
 
         $event->update($data);
+
+        return redirect('/event/' . $event->id);
     }
 
     /**
