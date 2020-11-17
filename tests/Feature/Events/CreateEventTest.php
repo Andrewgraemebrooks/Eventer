@@ -234,7 +234,7 @@ class CreateEventTest extends TestCase
      * An event description must be equal to or less than sixty characters.
      * @return void
      */
-    public function testDescriptionNeedsSixtMaxCharacters()
+    public function testDescriptionNeedsSixtyMaxCharacters()
     {
         // Act as a user to authenticate route.
         $this->actAsUser();
@@ -366,6 +366,29 @@ class CreateEventTest extends TestCase
 
         // Assert that there is an error
         $response->assertSessionHasErrors('venue');
+    }
+
+    /**
+     * An event duration must be an integer.
+     * @return void
+     */
+    public function testDurationMustBeAnInteger()
+    {
+        // Act as a user to authenticate route.
+        $this->actAsUser();
+
+        // Create the event.
+        $response = $this->createEvent(
+            'Event',
+            'Event Description',
+            now(),
+            '12:00:00',
+            'Event Duration',
+            'Event Venue'
+        );
+
+        // Assert that there is an error
+        $response->assertSessionHasErrors('duration');
     }
 
     /**
