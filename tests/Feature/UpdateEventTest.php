@@ -24,16 +24,15 @@ class UpdateEventTest extends TestCase
         // Act as a user to authenticate route.
         $this->actAsUser();
 
-        // Create an event
-        $this->createOrUpdateEvent(
-            true,
-            'Event',
-            'Event Description',
-            now(),
-            '12:00:00',
-            '120',
-            'Event Venue'
-        );
+        // Create an Event
+        $this->post('/event', [
+            'name' => 'Event',
+            'description' => 'Event Description',
+            'date' => now(),
+            'time' => '12:00:00',
+            "duration" => '120',
+            "venue" => 'Event Venue',
+        ]);
 
         // Assert that the event is stored in the database.
         $this->assertCount(1, Event::all());
@@ -41,17 +40,14 @@ class UpdateEventTest extends TestCase
         // Get event id
         $eventId = Event::all()->first()->id;
 
-        // Update the event
-        $response = $this->createOrUpdateEvent(
-            false,
-            'Updated Event',
-            'Updated Event Description',
-            now(),
-            '12:00:00',
-            '120',
-            'Updated Event Venue',
-            $eventId
-        );
+        $response = $this->patch('/event/' . $eventId, [
+            'name' => 'Updated Event',
+            'description' => 'Updated Event Description',
+            'date' => now(),
+            'time' => '12:00:00',
+            "duration" => '120',
+            "venue" => 'Updated Event Venue',
+        ]);
 
         // Assert that the route works well.
         $response->assertOk();
@@ -77,40 +73,5 @@ class UpdateEventTest extends TestCase
 
         // Act as the newly created user.
         $this->actingAs(User::all()->first());
-    }
-
-    /**
-     * @param $create
-     * @param $name
-     * @param $desc
-     * @param $date
-     * @param $time
-     * @param $duration
-     * @param $venue
-     * @param string $eventId
-     * @return \Illuminate\Testing\TestResponse
-     */
-    protected function createOrUpdateEvent($create, $name, $desc, $date, $time, $duration, $venue, $eventId = '-1'):
-    \Illuminate\Testing\TestResponse
-    {
-        if ($create) {
-            return $this->post('/event', [
-                'name' => $name,
-                'description' => $desc,
-                'date' => $date,
-                'time' => $time,
-                "duration" => $duration,
-                "venue" => $venue,
-            ]);
-        } else {
-            return $this->patch('/event/' . $eventId, [
-                'name' => 'Updated Event',
-                'description' => 'Updated Event Description',
-                'date' => now(),
-                'time' => '12:00:00',
-                "duration" => '120',
-                "venue" => 'Updated Event Venue',
-            ]);
-        }
     }
 }
