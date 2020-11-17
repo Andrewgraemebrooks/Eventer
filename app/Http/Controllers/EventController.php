@@ -33,7 +33,7 @@ class EventController extends Controller
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
      */
     public function store(Request $request)
     {
@@ -43,6 +43,8 @@ class EventController extends Controller
         $event->fill($data);
         $event->user_id = Auth::id();
         $event->save();
+
+        return redirect('/event/' . $event->id);
     }
 
     /**
@@ -72,7 +74,7 @@ class EventController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param \App\Models\Event $event
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirecto
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
      */
     public function update(Request $request, Event $event)
     {

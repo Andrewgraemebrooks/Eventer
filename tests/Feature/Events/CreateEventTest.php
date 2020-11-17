@@ -36,11 +36,14 @@ class CreateEventTest extends TestCase
             'Event Venue'
         );
 
-        // Assert that the route works well.
-        $response->assertOk();
 
         // Assert that the event is stored in the database.
         $this->assertCount(1, Event::all());
+
+        $eventId = Event::all()->first()->id;
+
+        // Assert that the user is redirected to the new event page
+        $response->assertRedirect('/event/' . $eventId);
     }
 
     /**
