@@ -22,12 +22,13 @@ class EventFactory extends Factory
     public function definition()
     {
         return [
+            'user_id' => 1,
             'name' => $this->faker->company,
             'description' => $this->faker->catchPhrase,
             'date' => $this->faker->date('Y-m-d'),
             'time' => $this->faker->time('H:i:s'),
-            'duration' => $this->faker->numberBetween(0, 1440),
-            'venue' => $this->faker->streetAddress
+            'duration' => $this->faker->time('H:i'),
+            'venue' => $this->faker->streetAddress,
         ];
     }
 }

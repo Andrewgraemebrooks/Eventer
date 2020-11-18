@@ -112,7 +112,7 @@ class EventController extends Controller
             'description' => ['required', 'max:60'],
             'date' => ['required', 'date'],
             'time' => ['required', 'date_format:H:i:s'],
-            'duration' => ['required', 'integer', 'between:1,1440'],
+            'duration' => ['required', 'date_format:H:i'],
             'venue' => ['required', 'max:60'],
         ]);
     }
