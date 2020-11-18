@@ -45,7 +45,7 @@ class EventController extends Controller
         $event->user_id = Auth::id();
         $event->save();
 
-        return redirect('/event/' . $event->id);
+        return redirect($event->path());
     }
 
     /**
@@ -83,7 +83,7 @@ class EventController extends Controller
 
         $event->update($data);
 
-        return redirect('/event/' . $event->id);
+        return redirect($event->path());
     }
 
     /**
