@@ -20,9 +20,6 @@ class DeleteEventTest extends TestCase
      */
     public function testEventCanBeDeleted()
     {
-        // Remove exception handling to ensure that Laravel doesn't hide exception details.
-        $this->withoutExceptionHandling();
-
         // Act as a user to authenticate route.
         $this->actAsUser();
 
@@ -39,11 +36,11 @@ class DeleteEventTest extends TestCase
         // Assert that the event is stored in the database.
         $this->assertCount(1, Event::all());
 
-        // Get event id
-        $eventId = Event::all()->first()->id;
+        // Get the event
+        $event = Event::all()->first();
 
         // Delete event
-        $response = $this->delete('/event/' . $eventId);
+        $response = $this->delete($event->path());
 
         // Assert the event has been deleted
         $this->assertCount(0, Event::all());
