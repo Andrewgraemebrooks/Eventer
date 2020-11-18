@@ -18,9 +18,6 @@ class UpdateEventTest extends TestCase
      */
     public function testEventCanBeUpdated()
     {
-        // Remove exception handling to ensure that Laravel doesn't hide exception details.
-        $this->withoutExceptionHandling();
-
         // Act as a user to authenticate route.
         $this->actAsUser();
 
@@ -29,11 +26,12 @@ class UpdateEventTest extends TestCase
         // Assert that the event is stored in the database.
         $this->assertCount(1, Event::all());
 
-        // Get event id
-        $eventId = Event::all()->first()->id;
+        // Find the event.
+        $event = Event::all()->first();
 
+        // Update the event.
         $response = $this->updateEvent(
-            $eventId,
+            $event,
             'Updated Event',
             'Updated Event Description',
             now(),
@@ -43,12 +41,12 @@ class UpdateEventTest extends TestCase
         );
 
         // Assert that the event has been updated.
-        $this->assertEquals('Updated Event', Event::all()->first()->name);
-        $this->assertEquals('Updated Event Description', Event::all()->first()->description);
-        $this->assertEquals('Updated Event Venue', Event::all()->first()->venue);
+        $this->assertEquals('Updated Event', $event->fresh()->name);
+        $this->assertEquals('Updated Event Description', $event->fresh()->description);
+        $this->assertEquals('Updated Event Venue', $event->fresh()->venue);
 
         // Assert that the route redirects the user back to the event page.
-        $response->assertRedirect('/event/' . $eventId);
+        $response->assertRedirect($event->path());
     }
 
     /**
@@ -73,10 +71,11 @@ class UpdateEventTest extends TestCase
         // Assert that the event is stored in the database.
         $this->assertCount(1, Event::all());
 
-        $eventId = Event::all()->first()->id;
+        // Get the event from the database.
+        $event = Event::all()->first();
 
         $response = $this->updateEvent(
-            $eventId,
+            $event,
             '',
             'Updated Event Description',
             now(),
@@ -111,12 +110,12 @@ class UpdateEventTest extends TestCase
         // Assert that the event is stored in the database.
         $this->assertCount(1, Event::all());
 
-        // Get the id of the event
-        $eventId = Event::all()->first()->id;
+        // Get the event from the database.
+        $event = Event::all()->first();
 
         // Update the event
         $response = $this->updateEvent(
-            $eventId,
+            $event,
             'Event Name',
             '',
             now(),
@@ -151,12 +150,12 @@ class UpdateEventTest extends TestCase
         // Assert that the event is stored in the database.
         $this->assertCount(1, Event::all());
 
-        // Get the id of the event
-        $eventId = Event::all()->first()->id;
+        // Get the event from the database.
+        $event = Event::all()->first();
 
         // Update the event
         $response = $this->updateEvent(
-            $eventId,
+            $event,
             'Event Name',
             'Event Description',
             "",
@@ -191,12 +190,12 @@ class UpdateEventTest extends TestCase
         // Assert that the event is stored in the database.
         $this->assertCount(1, Event::all());
 
-        // Get the id of the event
-        $eventId = Event::all()->first()->id;
+        // Get the event from the database.
+        $event = Event::all()->first();
 
         // Update the event
         $response = $this->updateEvent(
-            $eventId,
+            $event,
             'Event Name',
             'Event Description',
             now(),
@@ -231,12 +230,12 @@ class UpdateEventTest extends TestCase
         // Assert that the event is stored in the database.
         $this->assertCount(1, Event::all());
 
-        // Get the id of the event
-        $eventId = Event::all()->first()->id;
+        // Get the event from the database.
+        $event = Event::all()->first();
 
         // Update the event
         $response = $this->updateEvent(
-            $eventId,
+            $event,
             'Event Name',
             'Event Description',
             now(),
@@ -271,12 +270,12 @@ class UpdateEventTest extends TestCase
         // Assert that the event is stored in the database.
         $this->assertCount(1, Event::all());
 
-        // Get the id of the event
-        $eventId = Event::all()->first()->id;
+        // Get the event from the database.
+        $event = Event::all()->first();
 
         // Update the event
         $response = $this->updateEvent(
-            $eventId,
+            $event,
             'Event Name',
             'Event Description',
             now(),
@@ -311,12 +310,12 @@ class UpdateEventTest extends TestCase
         // Assert that the event is stored in the database.
         $this->assertCount(1, Event::all());
 
-        // Get the id of the event
-        $eventId = Event::all()->first()->id;
+        // Get the event from the database.
+        $event = Event::all()->first();
 
         // Update the event
         $response = $this->updateEvent(
-            $eventId,
+            $event,
             'Ev',
             'Event Description',
             now(),
@@ -351,12 +350,12 @@ class UpdateEventTest extends TestCase
         // Assert that the event is stored in the database.
         $this->assertCount(1, Event::all());
 
-        // Get the id of the event
-        $eventId = Event::all()->first()->id;
+        // Get the event from the database.
+        $event = Event::all()->first();
 
         // Update the event
         $response = $this->updateEvent(
-            $eventId,
+            $event,
             'yNO21DhVnIOQCnb7kJuGhraUA2FzvmFTzK44tbestjNMBG1z7lRSJKD2CUXxm',
             'Event Description',
             now(),
@@ -391,12 +390,12 @@ class UpdateEventTest extends TestCase
         // Assert that the event is stored in the database.
         $this->assertCount(1, Event::all());
 
-        // Get the id of the event
-        $eventId = Event::all()->first()->id;
+        // Get the event from the database.
+        $event = Event::all()->first();
 
         // Update the event
         $response = $this->updateEvent(
-            $eventId,
+            $event,
             'Event Name',
             'yNO21DhVnIOQCnb7kJuGhraUA2FzvmFTzK44tbestjNMBG1z7lRSJKD2CUXxm',
             now(),
@@ -431,12 +430,12 @@ class UpdateEventTest extends TestCase
         // Assert that the event is stored in the database.
         $this->assertCount(1, Event::all());
 
-        // Get the id of the event
-        $eventId = Event::all()->first()->id;
+        // Get the event from the database.
+        $event = Event::all()->first();
 
         // Update the event
         $response = $this->updateEvent(
-            $eventId,
+            $event,
             'Event Name',
             'Event Description',
             '12:00:00',
@@ -471,12 +470,12 @@ class UpdateEventTest extends TestCase
         // Assert that the event is stored in the database.
         $this->assertCount(1, Event::all());
 
-        // Get the id of the event
-        $eventId = Event::all()->first()->id;
+        // Get the event from the database.
+        $event = Event::all()->first();
 
         // Update the event
         $response = $this->updateEvent(
-            $eventId,
+            $event,
             'Event Name',
             'Event Description',
             now(),
@@ -511,12 +510,12 @@ class UpdateEventTest extends TestCase
         // Assert that the event is stored in the database.
         $this->assertCount(1, Event::all());
 
-        // Get the id of the event
-        $eventId = Event::all()->first()->id;
+        // Get the event from the database.
+        $event = Event::all()->first();
 
         // Update the event
         $response = $this->updateEvent(
-            $eventId,
+            $event,
             'Event Name',
             'Event Description',
             now(),
@@ -551,12 +550,12 @@ class UpdateEventTest extends TestCase
         // Assert that the event is stored in the database.
         $this->assertCount(1, Event::all());
 
-        // Get the id of the event
-        $eventId = Event::all()->first()->id;
+        // Get the event from the database.
+        $event = Event::all()->first();
 
         // Update the event
         $response = $this->updateEvent(
-            $eventId,
+            $event,
             'Event Name',
             'Event Description',
             now(),
@@ -591,12 +590,12 @@ class UpdateEventTest extends TestCase
         // Assert that the event is stored in the database.
         $this->assertCount(1, Event::all());
 
-        // Get the id of the event
-        $eventId = Event::all()->first()->id;
+        // Get the event from the database.
+        $event = Event::all()->first();
 
         // Update the event
         $response = $this->updateEvent(
-            $eventId,
+            $event,
             'Event Name',
             'Event Description',
             now(),
@@ -631,12 +630,12 @@ class UpdateEventTest extends TestCase
         // Assert that the event is stored in the database.
         $this->assertCount(1, Event::all());
 
-        // Get the id of the event
-        $eventId = Event::all()->first()->id;
+        // Get the event from the database.
+        $event = Event::all()->first();
 
         // Update the event
         $response = $this->updateEvent(
-            $eventId,
+            $event,
             'Event Name',
             'Event Description',
             now(),
@@ -665,7 +664,6 @@ class UpdateEventTest extends TestCase
         // Act as the newly created user.
         $this->actingAs(User::all()->first());
     }
-
 
     /**
      * @param $name
@@ -698,7 +696,7 @@ class UpdateEventTest extends TestCase
      * @return \Illuminate\Testing\TestResponse
      */
     protected function updateEvent(
-        $eventId,
+        $event,
         $name,
         $desc,
         $date,
@@ -707,7 +705,7 @@ class UpdateEventTest extends TestCase
         $venue
     ): \Illuminate\Testing\TestResponse
     {
-        return $this->patch('/event/' . $eventId, [
+        return $this->patch('/event/' . $event->id, [
             'name' => $name,
             'description' => $desc,
             'date' => $date,
