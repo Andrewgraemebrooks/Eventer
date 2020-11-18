@@ -23,11 +23,11 @@ class EventFactory extends Factory
     {
         return [
             'name' => $this->faker->company,
-            'description' => $this->faker->realText(60,1),
+            'description' => $this->faker->catchPhrase,
             'date' => $this->faker->date('Y-m-d'),
             'time' => $this->faker->time('H:i:s'),
             'duration' => $this->faker->numberBetween(0, 1440),
-            'venue' => $this->faker->company
+            'venue' => $this->faker->streetAddress
         ];
     }
 }
