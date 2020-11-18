@@ -22,4 +22,14 @@ class Event extends Model
         'duration',
         'venue',
     ];
+
+    /**
+     * Returns the path that the event is located at.
+     * @return string
+     * @author Andrew Brooks
+     */
+    public function path()
+    {
+        return '/event/' . $this->id;
+    }
 }
