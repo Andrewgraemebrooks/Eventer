@@ -20,9 +20,6 @@ class CreateEventTest extends TestCase
      */
     public function testEventCanBeStoredInDatabase()
     {
-        // Remove exception handling to ensure that Laravel doesn't hide exception details.
-        $this->withoutExceptionHandling();
-
         // Act as a user to authenticate routes.
         $this->actAsUser();
 
@@ -36,14 +33,14 @@ class CreateEventTest extends TestCase
             'Event Venue'
         );
 
-
         // Assert that the event is stored in the database.
         $this->assertCount(1, Event::all());
 
-        $eventId = Event::all()->first()->id;
+        // Find the event
+        $event = Event::all()->first();
 
         // Assert that the user is redirected to the new event page
-        $response->assertRedirect('/event/' . $eventId);
+        $response->assertRedirect($event->path());
     }
 
     /**
