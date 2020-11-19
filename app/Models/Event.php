@@ -32,4 +32,12 @@ class Event extends Model
     {
         return '/event/' . $this->id;
     }
+
+    /**
+     * The speakers that belong to the event.
+     */
+    public function speakers()
+    {
+        return $this->belongsToMany('App\Models\Speaker');
+    }
 }
