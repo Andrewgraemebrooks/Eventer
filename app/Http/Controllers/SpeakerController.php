@@ -76,7 +76,11 @@ class SpeakerController extends Controller
      */
     public function update(Request $request, Speaker $speaker)
     {
-        //
+        $data = $this->validateRequest($request);
+
+        $speaker->update($data);
+
+        return redirect($speaker->path());
     }
 
     /**
