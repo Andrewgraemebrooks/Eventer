@@ -35,9 +35,19 @@ class Event extends Model
 
     /**
      * The speakers that belong to the event.
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @author Andrew Brooks
      */
     public function speakers()
     {
         return $this->belongsToMany('App\Models\Speaker');
+    }
+
+    /**
+     * Add a speaker to the event
+     */
+    public function addSpeaker(Speaker $speaker)
+    {
+        $this->speakers()->save($speaker);
     }
 }

@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Event;
+use App\Models\Speaker;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -294,6 +295,24 @@ class EventTest extends TestCase
 
         // Assert that the user has been redirected
         $response->assertRedirect('/events');
+    }
+
+    /**
+     * A speaker can be added to an event
+     */
+    public function testAddSpeakerToAnEvent()
+    {
+         // Create an event
+         $event = Event::factory()->create();
+
+         // Create a speaker
+         $speaker = Speaker::factory()->create();
+
+         // Add speaker to the event
+         $event->addSpeaker($speaker);
+
+         // Test that a speaker has been added to the event
+         $this->assertCount(1, $event->speakers()->getResults());
     }
 
     /**
