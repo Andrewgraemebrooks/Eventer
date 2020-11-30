@@ -22,6 +22,9 @@ Route::get('/', function () {
 // The event resource routes.
 Route::resource('event', EventController::class);
 
+// The speaker resource routes.
+Route::resource('speaker', \App\Http\Controllers\SpeakerController::class)->middleware('auth');
+
 // Authentication routes.
 Auth::routes();
 

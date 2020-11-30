@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Speaker;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SpeakerController extends Controller
 {
@@ -31,11 +32,17 @@ class SpeakerController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
      */
     public function store(Request $request)
     {
-        //
+        $data = $this->validateRequest($request);
+
+        $speaker = new Speaker();
+        $speaker->fill($data);
+        $speaker->save();
+
+        return redirect($speaker->path());
     }
 
     /**
@@ -81,5 +88,19 @@ class SpeakerController extends Controller
     public function destroy(Speaker $speaker)
     {
         //
+    }
+
+    /**
+     * Validates the event form fields from the request.
+     * @param Request $request
+     * @return array
+     * @author Andrew Brooks
+     */
+    protected function validateRequest(Request $request): array
+    {
+        return $request->validate([
+            'name' => ['required', 'min:3', 'max:60'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:speakers'],
+        ]);
     }
 }

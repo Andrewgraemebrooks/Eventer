@@ -20,6 +20,16 @@ class Speaker extends Model
     ];
 
     /**
+     * Returns the path that the speaker is located at.
+     * @return string
+     * @author Andrew Brooks
+     */
+    public function path()
+    {
+        return '/speaker/' . $this->id;
+    }
+
+    /**
      * The events that belong to the speaker.
      */
     public function speakers()
