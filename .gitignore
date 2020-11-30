@@ -13,3 +13,4 @@ yarn-error.log
 .idea
 aliases.sh
 *.DS_Store
+.vscode/settings.json

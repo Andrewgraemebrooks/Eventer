@@ -316,6 +316,30 @@ class EventTest extends TestCase
     }
 
     /**
+     * A speaker can be deleted from an event
+     */
+    public function testDeleteSpeakerFromAnEvent()
+    {
+        // Create an event
+        $event = Event::factory()->create();
+
+        // Create a speaker
+        $speaker = Speaker::factory()->create();
+
+        // Add speaker to the event
+        $event->addSpeaker($speaker);
+
+        // Test that a speaker has been added to the event
+        $this->assertCount(1, $event->speakers()->getResults());
+
+        // Delete the speaker from the event
+        $event->deleteSpeaker($speaker);
+
+        // Test that a speaker has been deleted from the event
+        $this->assertCount(0, $event->speakers()->getResults());
+    }
+
+    /**
      * Allows the test to authenticate routes as a user
      * @returns void
      * @author Andrew Brooks

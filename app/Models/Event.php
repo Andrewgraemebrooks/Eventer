@@ -50,4 +50,12 @@ class Event extends Model
     {
         $this->speakers()->save($speaker);
     }
+
+    /**
+     * Delete a speaker from the event
+     */
+    public function deleteSpeaker(Speaker $speaker)
+    {
+        $this->speakers()->detach($speaker);
+    }
 }
