@@ -91,7 +91,8 @@ class SpeakerController extends Controller
      */
     public function destroy(Speaker $speaker)
     {
-        //
+        $speaker->delete();
+        return redirect('/speakers');
     }
 
     /**

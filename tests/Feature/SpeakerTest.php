@@ -72,6 +72,33 @@ class SpeakerTest extends TestCase
     }
 
     /**
+     * A speaker can be deleted
+     */
+    public function testSpeakerCanBeDeleted()
+    {
+        // Act as a user to authenticate routes.
+        $this->actAsUser();
+
+        // Create a speaker
+        $this->post('/speaker', Speaker::factory()->raw());
+
+        // Assert that the speaker is stored in the database.
+        $this->assertCount(1, Speaker::all());
+
+        // Find the speaker
+        $speaker = Speaker::all()->first();
+
+        // Delete speaker
+        $response = $this->delete($speaker->path());
+
+        // Assert the speaker has been deleted
+        $this->assertCount(0, Speaker::all());
+
+        // Assert that the user has been redirected
+        $response->assertRedirect('/speakers');
+    }
+
+    /**
      * Allows the test to authenticate routes as a user
      * @returns void
      * @author Andrew Brooks
