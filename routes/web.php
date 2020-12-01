@@ -1,7 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use \App\Http\Controllers\EventController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\SpeakerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,19 +16,14 @@ use \App\Http\Controllers\EventController;
 |
 */
 
-// Welcome route.
-Route::get('/', function () {
-    return view('welcome');
-});
+// React Route
+Route::view('/{path?}', 'app');
 
 // The event resource routes.
 Route::resource('event', EventController::class);
 
 // The speaker resource routes.
-Route::resource('speaker', \App\Http\Controllers\SpeakerController::class)->middleware('auth');
+Route::resource('speaker', SpeakerController::class)->middleware('auth');
 
 // Authentication routes.
 Auth::routes();
-
-// Home controller index route.
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
