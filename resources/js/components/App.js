@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import Navbar from './shared/Navbar.js'
+import Navbar from './shared/Navbar'
 import Landing from './landing/Landing'
-import Footer from './shared/Footer.js'
+import Footer from './shared/Footer'
+import Register from './authentication/Register'
 
 class App extends Component {
   render() {
@@ -12,6 +13,7 @@ class App extends Component {
         <Navbar />
         <Switch>
           <Route exact path="/" component={Landing} />
+          <Route exact path="/register" component={Register} />
         </Switch>
         <Footer />
       </BrowserRouter>

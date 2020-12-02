@@ -1,8 +1,9 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function Landing() {
   return (
-    <div id="landing-container" className="container-fluid py-4">
+    <div className="container-fluid content-container">
       <div className="col-md-6">
         <img
           id="landing-image"
@@ -22,10 +23,18 @@ function Landing() {
         </div>
         <div id="landing-buttons" className="row ">
           <div className="col-6">
-            <button className="btn btn-primary landing-button">Register</button>
+            <Link to="/register">
+              <button className="btn btn-primary landing-button">
+                Register
+              </button>
+            </Link>
           </div>
           <div className="col-6">
-            <button className="btn btn-primary landing-button">Login</button>
+            <Link to="/login">
+              <button className="btn btn-primary landing-button">
+                Login
+              </button>
+            </Link>
           </div>
         </div>
       </div>
