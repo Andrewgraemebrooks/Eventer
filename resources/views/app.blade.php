@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>Eventer</title>
-    <link rel="icon" type="image/png" href="media/Logo/favicon-32x32.png"/>
+    <link rel="icon" type="image/png" href="media/Logo/favicon-32x32.png" />
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" />
   </head>
