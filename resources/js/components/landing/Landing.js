@@ -25,7 +25,9 @@ function Landing() {
             <button className="btn btn-primary landing-button">Register</button>
           </div>
           <div className="col-6">
-            <button className="btn btn-primary landing-button">Login</button>
+            <Link to="/login">
+              <button className="btn btn-primary landing-button">Login</button>
+            </Link>
           </div>
         </div>
       </div>

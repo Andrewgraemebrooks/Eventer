@@ -60,6 +60,16 @@
   padding-top: 2em;
 }
 
+#register-text {
+  color: white;
+  text-align: left;
+}
+
+.navbar-nav {
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
 // Small devices (landscape phones, 576px and up)
 @media (min-width: 576px) {
 }

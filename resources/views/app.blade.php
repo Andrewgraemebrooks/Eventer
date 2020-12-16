@@ -12,7 +12,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" />
   </head>
   <body>
-    <div id="app"></div>
+    <div id="index"></div>
 
     <script src="{{ asset('js/app.js') }}"></script>
   </body>

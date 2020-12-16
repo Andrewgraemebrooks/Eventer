@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -20,7 +21,7 @@ class RegisterController extends Controller
     | validation and creation. By default this controller uses a trait to
     | provide this functionality without requiring any additional code.
     |
-    */
+     */
 
     use RegistersUsers;
 
@@ -70,4 +71,37 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
+
+    // /**
+    //  * Store a newly created resource in storage.
+    //  *
+    //  * @param \Illuminate\Http\Request $request
+    //  * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
+    //  */
+    // public function store(Request $request)
+    // {
+    //     $data = $this->validateRequest($request);
+
+    //     User::create([
+    //         'name' => $data['name'],
+    //         'email' => $data['email'],
+    //         'password' => Hash::make($data['password']),
+    //     ]);
+
+    //     // return redirect('/');
+    // }
+
+    // /**
+    //  * Validates the event form fields from the request.
+    //  * @param Request $request
+    //  * @return array
+    //  * @author Andrew Brooks
+    //  */
+    // protected function validateRequest(Request $request): array
+    // {
+    //     return $request->validate([
+    //         'name' => ['required', 'string', 'max:255'],
+    //         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+    //         'password' => ['required', 'string', 'min:8']]);
+    // }
 }
