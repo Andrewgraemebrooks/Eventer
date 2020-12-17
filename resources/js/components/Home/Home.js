@@ -40,7 +40,7 @@ class Home extends Component {
           <div id="landing-description" className="col-md-6">
             <div className="row">
               <h3 className="landing-text">
-                See what's happening in the world right now
+                The Home of Event Management.
               </h3>
             </div>
             <div className="row">
