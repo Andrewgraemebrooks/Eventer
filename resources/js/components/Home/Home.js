@@ -28,7 +28,7 @@ class Home extends Component {
           userData={this.state.user}
           userIsLoggedIn={this.state.isLoggedIn}
         ></Header>
-        <div className="container-fluid content-container">
+        <div id="landing-container" className="container-fluid content-container">
           <div className="col-md-6">
             <img
               id="landing-image"
