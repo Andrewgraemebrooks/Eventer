@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import Footer from '../Footer/Footer'
-import Header from '../Header/Header'
+import Footer from '../../components/Footer/Footer'
+import Header from '../../components/Header/Header'
 import { Link } from 'react-router-dom'
 
 class Home extends Component {
