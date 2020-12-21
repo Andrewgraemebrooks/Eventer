@@ -1,5 +1,5 @@
 #landing-container {
-  height: 100vh;
+  height: $content-container-height;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -35,4 +35,14 @@
 
 #landing-buttons {
   padding-top: 0.5em;
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+  #landing-image {
+    height: auto;
+  }
+  #landing-container {
+    flex-direction: row;
+  }
 }

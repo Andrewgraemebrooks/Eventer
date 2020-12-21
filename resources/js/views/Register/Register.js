@@ -37,32 +37,36 @@ class Register extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div id="register-container" className="container">
         <div className="row">
+          <label htmlFor="name">Name</label>
           <input
             type="text"
-            className="form-control"
+            className="form-control register-input"
             onChange={this.onChange}
             placeholder="Name"
             name="name"
           />
+          <label htmlFor="email">Email</label>
           <input
             type="text"
-            className="form-control"
+            className="form-control register-input"
             onChange={this.onChange}
             placeholder="Email"
             name="email"
           />
+          <label htmlFor="password">Password</label>
           <input
             type="password"
-            className="form-control"
+            className="form-control register-input"
             onChange={this.onChange}
             placeholder="Password"
             name="password"
           />
+          <label htmlFor="password_confirmation">Confirm Password</label>
           <input
             type="password"
-            className="form-control"
+            className="form-control register-input"
             onChange={this.onChange}
             placeholder="Confirm Password"
             name="password_confirmation"
