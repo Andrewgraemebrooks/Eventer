@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import Footer from '../../components/Footer/Footer'
-import Header from '../../components/Header/Header'
 import { Link } from 'react-router-dom'
 
 class Home extends Component {
@@ -24,11 +22,10 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <Header
-          userData={this.state.user}
-          userIsLoggedIn={this.state.isLoggedIn}
-        ></Header>
-        <div id="landing-container" className="container-fluid content-container">
+        <div
+          id="landing-container"
+          className="container-fluid content-container"
+        >
           <div className="col-md-6">
             <img
               id="landing-image"
@@ -39,9 +36,7 @@ class Home extends Component {
           </div>
           <div id="landing-description" className="col-md-6">
             <div className="row">
-              <h3 className="landing-text">
-                The Home of Event Management.
-              </h3>
+              <h3 className="landing-text">The Home of Event Management.</h3>
             </div>
             <div className="row">
               <p className="landing-text">Join Eventer Today</p>
@@ -64,7 +59,6 @@ class Home extends Component {
             </div>
           </div>
         </div>
-        <Footer />
       </div>
     )
   }
