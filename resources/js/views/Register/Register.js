@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import { useHistory } from 'react-router-dom'
 
 class Register extends Component {
   constructor(props) {
@@ -31,7 +32,9 @@ class Register extends Component {
     const userData = this.state
     axios
       .post('/api/auth/signup', userData)
-      .then(response => console.log(response))
+      .then(response => {
+        this.props.history.push('/login')
+      })
       .catch(error => console.log(error))
   }
 
