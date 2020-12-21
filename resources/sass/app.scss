@@ -2,74 +2,15 @@
 @import url('https://fonts.googleapis.com/css?family=Varela');
 
 // Variables
-@import 'variables';
+@import '_variables';
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
-// Extra small devices (portrait phones, less than 576px)
-// No media query since this is the default in Bootstrap
-.navbar,
-.footer,
-#landing-container {
-  background-color: $dark-grey;
-}
-
-#nav-logo {
-  width: 32px;
-  height: 32px;
-}
-
-.landing-button {
-  border-radius: 8px;
-}
-
-#landing-buttons {
-  padding-top: 0.5em;
-}
-
-#landing-image {
-  width: 100%;
-  height: 300px;
-  border-radius: 10%;
-}
-
-.landing-text,
-#footer-text {
-  color: white;
-  font-weight: bold;
-  text-align: center;
-}
-
-.footer {
-  padding: 1em 0em 1em 0em;
-}
-
-#landing-container {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-#landing-description {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding-top: 2em;
-}
-
-#register-text {
-  color: white;
-  text-align: left;
-}
-
-.navbar-nav {
-  flex-direction: row;
-  justify-content: flex-end;
-}
+// Import Views and Components
+@import 'views/home';
+@import 'components/header';
+@import 'components/footer';
 
 // Small devices (landscape phones, 576px and up)
 @media (min-width: 576px) {

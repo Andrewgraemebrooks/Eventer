@@ -22,10 +22,7 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <div
-          id="landing-container"
-          className="container-fluid content-container"
-        >
+        <div id="landing-container" className="container-fluid">
           <div className="col-md-6">
             <img
               id="landing-image"
