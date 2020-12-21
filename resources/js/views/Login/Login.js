@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
-class Register extends Component {
+class Login extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      name: '',
       email: '',
       password: '',
-      password_confirmation: '',
     }
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
@@ -30,9 +28,14 @@ class Register extends Component {
     event.preventDefault()
     const userData = this.state
     axios
-      .post('/api/auth/signup', userData)
+      .post('/api/auth/login', userData)
       .then(response => {
-        this.props.history.push('/login')
+        const token = response.data.access_token
+        const appState = {
+          isLoggedIn: true,
+          access_token: token,
+        }
+        localStorage['appState'] = JSON.stringify(appState)
       })
       .catch(error => console.log(error))
   }
@@ -41,18 +44,10 @@ class Register extends Component {
     return (
       <div className="container authentication-container">
         <div className="row">
-          <label htmlFor="name">Name</label>
-          <input
-            type="text"
-            className="form-control register-input"
-            onChange={this.onChange}
-            placeholder="Name"
-            name="name"
-          />
           <label htmlFor="email">Email</label>
           <input
             type="text"
-            className="form-control register-input"
+            className="form-control login-input"
             onChange={this.onChange}
             placeholder="Email"
             name="email"
@@ -60,18 +55,10 @@ class Register extends Component {
           <label htmlFor="password">Password</label>
           <input
             type="password"
-            className="form-control register-input"
+            className="form-control login-input"
             onChange={this.onChange}
             placeholder="Password"
             name="password"
-          />
-          <label htmlFor="password_confirmation">Confirm Password</label>
-          <input
-            type="password"
-            className="form-control register-input"
-            onChange={this.onChange}
-            placeholder="Confirm Password"
-            name="password_confirmation"
           />
           <button className="btn btn-outline-success" onClick={this.onSubmit}>
             Submit
@@ -82,4 +69,4 @@ class Register extends Component {
   }
 }
 
-export default Register
+export default Login
