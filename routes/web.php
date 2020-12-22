@@ -24,6 +24,3 @@ Route::resource('event', EventController::class);
 
 // The speaker resource routes.
 Route::resource('speaker', SpeakerController::class)->middleware('auth');
-
-// Authentication routes.
-Auth::routes();
