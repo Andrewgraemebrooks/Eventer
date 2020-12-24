@@ -5,6 +5,7 @@ class Login extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      error: '',
       email: '',
       password: '',
     }
@@ -30,24 +31,35 @@ class Login extends Component {
     axios
       .post('/api/auth/login', userData)
       .then(response => {
-        const token = response.data.access_token
-        const appState = {
-          isLoggedIn: true,
-          access_token: token,
-        }
+        const appState = response.data
         localStorage['appState'] = JSON.stringify(appState)
+        this.setState
       })
-      .catch(error => console.log(error))
+      .catch(error => {
+        const appState = []
+        localStorage['appState'] = JSON.stringify(appState)
+        this.setState({ error: error.response.data.message })
+      })
   }
 
   render() {
     return (
       <div className="container authentication-container">
+        {this.state.error ? (
+          <div className="alert alert-danger" role="alert">
+            {this.state.error}
+          </div>
+        ) : (
+          ''
+        )}
         <div className="row">
           <label htmlFor="email">Email</label>
           <input
             type="text"
-            className="form-control login-input"
+            className={
+              'form-control login-input ' +
+              (this.state.error ? 'is-invalid' : '')
+            }
             onChange={this.onChange}
             placeholder="Email"
             name="email"
@@ -55,12 +67,15 @@ class Login extends Component {
           <label htmlFor="password">Password</label>
           <input
             type="password"
-            className="form-control login-input"
+            className={
+              'form-control login-input ' +
+              (this.state.error ? 'is-invalid' : '')
+            }
             onChange={this.onChange}
             placeholder="Password"
             name="password"
           />
-          <button className="btn btn-outline-success" onClick={this.onSubmit}>
+          <button className="btn btn-primary" onClick={this.onSubmit}>
             Submit
           </button>
         </div>
