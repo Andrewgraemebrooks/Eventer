@@ -33,10 +33,11 @@ class Login extends Component {
       .then(response => {
         const appState = response.data
         localStorage['appState'] = JSON.stringify(appState)
-        this.setState
+        this.setState({ error: '' })
+        this.props.history.push('/dashboard')
       })
       .catch(error => {
-        const appState = []
+        const appState = { isAuthenticated: false, access_token: '' }
         localStorage['appState'] = JSON.stringify(appState)
         this.setState({ error: error.response.data.message })
       })
