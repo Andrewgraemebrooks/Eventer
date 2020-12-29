@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import checkAppState from '../../utils/checkAppState'
 
-const appState = JSON.parse(localStorage['appState'])
+const appState = checkAppState()
 
 function Home(props) {
-  console.log(appState.isAuthenticated)
   return (
     <div>
       <div id="landing-container" className="container-fluid">

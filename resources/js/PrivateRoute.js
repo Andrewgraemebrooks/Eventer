@@ -1,7 +1,8 @@
 import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
+import checkAppState from './utils/checkAppState'
 
-const appState = JSON.parse(localStorage['appState'])
+const appState = checkAppState()
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   return (
