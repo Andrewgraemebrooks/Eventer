@@ -1,20 +1,30 @@
-/node_modules
-/public/hot
-/public/storage
-/storage/*.key
-/vendor
-.env.backup
-.env
-.phpunit.result.cache
-Homestead.json
-Homestead.yaml
-npm-debug.log
-yarn-error.log
-.idea
-aliases.sh
-*.DS_Store
-.vscode/settings.json
-public/css/app.css
-.prettierrc
-.vscode/launch.json
-public/js/react.js
+
+###> symfony/framework-bundle ###
+.env.local.php
+.env.local
+.env.*.local
+config/secrets/prod/prod.decrypt.private.php
+public/bundles/
+src/.preload.php
+var/
+vendor/
+###< symfony/framework-bundle ###
+
+# Workspace
+eventer.code-workspace
+
+#node_modules
+node_modules
+.DS_Store
+
+# Composer
+composer.phar
+
+###> squizlabs/php_codesniffer ###
+/.phpcs-cache
+/phpcs.xml
+/phpcs.xml.dist
+###< squizlabs/php_codesniffer ###
+
+# VS Code Debug Config
+.vscode
